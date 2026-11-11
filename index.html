@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ルーティン チェック</title>
+<meta name="apple-mobile-web-app-title" content="ルーティン">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8fd8b8">
+<style>
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#8fd8b8;color:#16231f;
+    font-family:"Hiragino Maru Gothic ProN","Yu Gothic UI","Meiryo",sans-serif;text-align:center}
+  main{padding:24px;max-width:340px}
+  img{width:120px;height:120px;border-radius:26px;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+  h1{font-size:20px;margin:16px 0 8px}
+  p{font-size:14px;line-height:1.8;margin:0 0 16px}
+  a.btn{display:inline-block;padding:14px 28px;border-radius:999px;background:#1f6b56;color:#fff;font-weight:700;text-decoration:none}
+  .how{margin-top:20px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.6);font-size:13px;text-align:left}
+</style>
+</head>
+<body>
+<main>
+  <img src="icon-192.png" alt="">
+  <h1>ルーティンワーク チェック</h1>
+  <p id="msg">アプリを開いています…</p>
+  <a class="btn" id="go" href="https://script.google.com/a/macros/hoyugakuin.jp/s/AKfycbzPq86NlCoScZ4flCK5-UIgnmytPkwIwQQIsEb_BNuEqW4gj8lDYOSpbpZjK-m60Ib9/exec">アプリを開く</a>
+  <div class="how" id="how" hidden>
+    <b>ホーム画面に追加するには</b><br>
+    iPhone：下の共有ボタン →「ホーム画面に追加」<br>
+    Android：右上の ⋮ →「ホーム画面に追加」<br>
+    追加できたら、次からはアイコンをタップするだけで開きます。
+  </div>
+</main>
+<script>
+  // 「?add」付きで開いたときは移動せず、ホーム画面への追加方法を表示する。
+  // それ以外（ホーム画面のアイコンから開いたとき）はすぐアプリへ移動する。
+  var url = document.getElementById('go').href;
+  if (location.search.indexOf('add') >= 0) {
+    document.getElementById('msg').textContent = 'このページをホーム画面に追加してください。';
+    document.getElementById('how').hidden = false;
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  } else {
+    location.replace(url);
+  }
+</script>
+</body>
+</html>
